@@ -1,0 +1,13 @@
+.test {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box
+}
+
+
+.multiline,
+.selector {
+  -webkit-box-shadow: 1px 0 9px rgba(0, 0, 0, .4),
+              1px 0 3px rgba(0, 0, 0, .6);
+          box-shadow: 1px 0 9px rgba(0, 0, 0, .4),
+              1px 0 3px rgba(0, 0, 0, .6)
+}
