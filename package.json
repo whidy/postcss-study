@@ -10,11 +10,13 @@
     "autoprefixer": "^7.1.2",
     "http-server": "^0.10.0",
     "postcss-cli": "^4.1.0",
+    "sugarss": "^1.0.0",
     "webpack": "^3.4.1"
   },
   "scripts": {
     "start": "http-server -o --cors",
-    "postcss:style01" :"postcss ./src/style01.css -o ./dist/output_style01.css -u autoprefixer"    
+    "postcss:style01": "postcss ./src/style01.css -o ./dist/output_style01.css -u autoprefixer",
+    "postcss:style02": "postcss ./src/style02.sss -o ./dist/output_style02.css -u autoprefixer -p sugarss"
   },
   "repository": {
     "type": "git",
