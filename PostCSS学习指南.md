@@ -79,18 +79,19 @@ CLI是否建议全局安装?（这样包括其对应的插件都要全局了？�
 
 另外我们可以同样的采用Parser插件来编译样式文件，我的demo里面请参考[style02.sss](https://github.com/whidy/postcss-study/blob/master/src/style02.sss)文件的编译。这里就不多说了。
 
-还有一种预先写好配置文件，这个就稍微先进一些，也不会看起来很乱。我们创建一个**postcss.config.js**文件：
-
-```javascript
-module.exports = {
-  parser: 'sugarss',
-  plugins: [
-    require('autoprefixer')
-  ]
-}
-```
-
-不过这种经过我个人测试，仅适用于全局安装了PostCSS-CLI和sugarss的情况下再该配置文件目录下执行`postcss ./src/style02.sss -o ./dist/test.css`命令就好了。这里个人不是很推荐。关于CLI下的一些方法暂时就不多说了，如有错误请各位大佬指正~😂
+> 还有一种预先写好配置文件，这个就稍微先进一些，也不会看起来很乱。我们创建一个**postcss.config.js**文件：
+>
+> ```javascript
+> module.exports = {
+>   parser: 'sugarss',
+>   plugins: [
+>     require('autoprefixer')
+>   ]
+> }
+> ```
+>
+> 不过这种经过我个人测试，<u>仅适用于全局安装了PostCSS-CLI和sugarss的情况</u>下再该配置文件目录下执行`postcss ./src/style02.sss -o ./dist/test.css`命令就好了。这里个人不是很推荐。关于CLI下的一些方法暂时就不多说了，如有错误请各位大佬指正~😂
+>
 
 ## PostCSS主要插件说明和介绍
 
@@ -114,7 +115,141 @@ CSS语法检查
 
 关于webpack基础配置的相关内容这里就不多说了~前面已有大神写了有兴趣可以[膜拜一下](http://git.oschina.net/janking/Infinite-f2e/issues/IDOHZ)。
 
+我们先来创建一个项目目录，结构如下：（style0*.css作为我测试的文件，后面可能增加）
 
+```
+|– dist
+|– src
+| |– images
+| | |– postcss-00.png
+| | |– postcss-01.png
+| – index.js
+| – index.html
+| – style04.sss
+|– postcss.config.js
+|– webpack.config.js
+|– package.json
+```
+
+接下来安装依赖包：
+
+`npm i -D postcss-loader style-loader css-loader webpack webpack-dev-server `
+
+然后修改已下文件，请仔细阅读😝
+
+package.json
+
+```javascript
+"scripts": {
+  "start": "webpack-dev-server",
+  "build": "webpack"
+},
+```
+
+先来个简单的试试：
+
+webpack.config.js
+
+```javascript
+var path = require('path');
+module.exports = {
+  entry: {
+    index: path.resolve(__dirname, 'src/index.js')
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  module: {
+    rules: [{
+      test: /\.sss$/,
+      exclude: /node_modules/,
+      use: [{
+          loader: 'style-loader',
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+          }
+        },
+        {
+          loader: 'postcss-loader'
+        }
+      ]
+    }]
+  },
+  devServer: {
+    contentBase: __dirname,
+    compress: true,
+    port: 9000,
+    inline: true,
+    hot: true,
+    host: '0.0.0.0',
+    disableHostCheck: true
+  }
+}
+```
+
+postcss.config.js
+
+```js
+module.exports = {
+  parser: 'sugarss',
+  plugins: [
+    require('precss'),
+    require('autoprefixer')
+  ]
+}
+```
+
+读完了应该发现此刻运行肯定会出错的~因为还没有安装其他跟PostCSS相关的插件呢，于是继续安装：
+
+`npm i -D sugarss precss autoprefixer`
+
+index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>这是一个用于PostCSS测试的页面</title>
+</head>
+<body>
+  <div class="test">
+    <p class="multiline">this is a container</p>
+  </div>
+  <script src="../dist/index.js"></script>
+</body>
+</html>
+```
+
+style04.sss
+
+```scss
+.test 
+  box-sizing: border-box
+  padding: 50px
+  border: 10px solid #f00
+  width: 200px
+  height: 200px
+
+.multiline,
+.selector
+  box-shadow: 1px 0 9px rgba(0, 0, 0, .4),
+              1px 0 3px rgba(0, 0, 0, .6)
+```
+
+基本工作大功告成，跑一条命令试试看。
+
+
+
+参考文献：
+
+[webpack官方说明：postcss-loader](https://webpack.js.org/loaders/postcss-loader/)
 
 ## PostCSS结合Gulp应用
 
