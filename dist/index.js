@@ -109,7 +109,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, ".test {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  padding: 50px;\r\n  border: 10px solid #f00;\r\n  width: 200px;\r\n  height: 200px\n}\r\n\r\n.multiline, .selector {\r\n  -webkit-box-shadow: 1px 0 9px rgba(0, 0, 0, .4),\r\n              1px 0 3px rgba(0, 0, 0, .6);\r\n          box-shadow: 1px 0 9px rgba(0, 0, 0, .4),\r\n              1px 0 3px rgba(0, 0, 0, .6)\n}", ""]);
+exports.push([module.i, ".test {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  padding: 50px;\r\n  border: 10px solid #056ef0;\r\n  width: 200px;\r\n  height: 200px\n}\r\n\r\n.multiline, .selector {\r\n  -webkit-box-shadow: 1px 0 9px rgba(0, 0, 0, .4),\r\n              1px 0 3px rgba(0, 0, 0, .6);\r\n          box-shadow: 1px 0 9px rgba(0, 0, 0, .4),\r\n              1px 0 3px rgba(0, 0, 0, .6)\n}", ""]);
 
 // exports
 

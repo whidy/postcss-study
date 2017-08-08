@@ -1,0 +1,7 @@
+/* gulp下测试 */
+$blue: #056ef0;
+
+.test {
+  display: flex;
+  color: $blue;
+}

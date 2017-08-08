@@ -7,6 +7,9 @@
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "css-loader": "^0.28.4",
+    "gulp": "^3.9.1",
+    "gulp-postcss": "^7.0.0",
+    "gulp-sourcemaps": "^2.6.0",
     "postcss-loader": "^2.0.6",
     "precss": "^2.0.0",
     "style-loader": "^0.18.2",
@@ -18,7 +21,8 @@
     "start": "webpack-dev-server",
     "postcss:style01": "postcss ./src/style01.css -o ./dist/output_style01.css -u autoprefixer",
     "postcss:style02": "postcss ./src/style02.sss -o ./dist/output_style02.css -u autoprefixer -p sugarss",
-    "build": "webpack"
+    "build": "webpack",
+    "gulp": "gulp css"
   },
   "repository": {
     "type": "git",

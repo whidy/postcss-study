@@ -1,0 +1,1 @@
+{"version":3,"sources":["style05.css"],"names":[],"mappings":"AAAA,aAAa;AAEb;EACE,qBAAc;EAAd,qBAAc;EAAd,cAAc;EACd,eAAa;CACd","file":"style05.css","sourcesContent":["/* gulp下测试 */\r\n$blue: #056ef0;\r\n.test {\r\n  display: flex;\r\n  color: $blue;\r\n}"]}
