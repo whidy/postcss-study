@@ -207,6 +207,8 @@ module.exports = {
 
 `npm i -D sugarss precss autoprefixer`
 
+（插件简单介绍，[sugarss](https://github.com/postcss/sugarss)是比较特别的css语法，我尚未了解到这样写的好处，仅供大家学习参考。[precss](https://github.com/jonathantneal/precss)功能就很强悍了，类似sass的一些功能。[autoprefixer](https://github.com/postcss/autoprefixer)就不用多说啦！）
+
 index.html
 
 ```html
@@ -230,10 +232,12 @@ index.html
 style04.sss
 
 ```scss
+$blue: #056ef0
+
 .test 
   box-sizing: border-box
   padding: 50px
-  border: 10px solid #f00
+  border: 10px solid $blue
   width: 200px
   height: 200px
 
@@ -243,9 +247,13 @@ style04.sss
               1px 0 3px rgba(0, 0, 0, .6)
 ```
 
-基本工作大功告成，跑一条命令试试看。
+基本工作大功告成，开两个终端跑两条命令试试看。
 
+`npm run start`
 
+`npm run build`
+
+一切运行OK，接下来访问http://localhost:9000/src/，看起来也都还不错。当然写到这里只是介绍了如何结合webpack使用PostCSS。而实际项目应用中，我目前还在探索更多实用的插件，构建一个基本可以替代SASS，LESS等
 
 参考文献：
 
@@ -253,15 +261,102 @@ style04.sss
 
 ## PostCSS结合Gulp应用
 
+Gulp我用的很少，不是很熟悉，这里结合官方一些和自己尝试的DEMO进行说明。
 
+我基于之前的代码来继续补充内容。
+
+安装Gulp相关的包：
+
+`npm run i -D gulp gulp-postcss gulp-sourcemaps`
+
+增加Gulp配置文件[gulpfile.js](https://github.com/whidy/postcss-study/blob/master/gulpfile.js)，页面[index2.html](https://github.com/whidy/postcss-study/blob/master/src/index2.html)，样式[style05.css](https://github.com/whidy/postcss-study/blob/master/src/style05.css)，修改package.json的script如下：
+
+[gulpfile.js](https://github.com/whidy/postcss-study/blob/master/gulpfile.js)
+
+```javascript
+var postcss = require('gulp-postcss');
+var gulp = require('gulp');
+
+gulp.task('css', function () {
+  var postcss = require('gulp-postcss');
+  var sourcemaps = require('gulp-sourcemaps');
+
+  return gulp.src('src/style05.css')
+    .pipe(sourcemaps.init())
+    .pipe(postcss([require('precss'), require('autoprefixer')]))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/'));
+});
+```
+
+[index2.html](https://github.com/whidy/postcss-study/blob/master/src/index2.html)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>这是一个用于PostCSS测试的页面(gulp)</title>
+  <link href="../dist/style05.css" rel="stylesheet">
+</head>
+<body>
+  <div class="test">
+    <p class="box">this is a box</p>
+    <p class="box">this is another box</p>
+  </div>
+</body>
+</html>
+```
+
+[style05.css](https://github.com/whidy/postcss-study/blob/master/src/style05.css)
+
+```sass
+/* gulp下测试 */
+$blue: #056ef0;
+.test {
+  display: flex;
+  color: $blue;
+  .box {
+    flex: 1;
+  }
+}
+```
+
+[package.json](https://github.com/whidy/postcss-study/blob/master/package.json)的scripts部分如下
+
+```javascript
+"scripts": {
+  "start": "webpack-dev-server",
+  "postcss:style01": "postcss ./src/style01.css -o ./dist/output_style01.css -u autoprefixer",
+  "postcss:style02": "postcss ./src/style02.sss -o ./dist/output_style02.css -u autoprefixer -p sugarss",
+  "build": "webpack",
+  "gulp": "gulp css"
+},
+```
+
+一切就绪后，我们来执行伟大的命令了：
+
+`npm run gulp`
+
+我的电脑等待了约1.26s~1.29s，提示finish啦~
+
+和之前相同，我这里依旧采用了webpack-dev-server启动的服务器（当然这个又依赖webpack配置，除非你将配置直接写入package.json内），那么你当然也可以使用其他自己喜欢的服务器（例如[http-server](https://github.com/indexzero/http-server)），我们依旧先启动服务器npm run start，然后访问本地http://localhost:9000/src/index2.html就可以看到效果了。或者你也可以直接去看dist目录内生成出来的style05.css文件，一切都是那么美好~
 
 ## PostCSS学习心得及总结
 
+因为这次学习，纯粹是根据“教科书”来学，来讲解的，因此也就没有什么真正的精髓，我也是才开始接触PostCSS，文中有错误之处还请指正。我希望以后在项目中尽可能的用好PostCSS，再次带来一篇简短而有力的文章分享给大家。因时间和精力有限希望这篇文章能给大家带来些帮助。目前能想到的，还有一些未来需要补充的内容包括：
 
+1. sourcemaps
+2. 是否有移动端基于PostCSS的自适应解决方案
+3. 自己写个可能会比较实用的插件
+4. 结合[postcss-sass](https://github.com/AleshaOleg/postcss-sass)究竟有什么好处
+5. postcss对图片和字体等资源文件处理
 
-因为这次学习，纯粹是根据“教科书”来学，来讲解的，因此也就没有什么真正的精髓。我希望以后在项目中尽可能的用好PostCSS，带来一篇简短而有用的文章分享给大家。
+暂时想到这些，如果你还有一些想到的欢迎在下面留言哦😘
 
-> 参考文献汇总：
+> 其他参考文献汇总：
 >
 > **[PostCSS Deep Dive](https://webdesign.tutsplus.com/series/postcss-deep-dive--cms-889)**（强烈推荐！我看完了才发现有部分译文：[PostCSS深入学习](http://www.w3cplus.com/PostCSS/postcss-deep-dive-what-you-need-to-know.html)）
 >
