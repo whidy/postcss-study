@@ -1,6 +1,6 @@
 # PostCSS学习指南-插件（二）
 
-继上一次[PostCSS学习指南（一）](http://git.oschina.net/janking/Infinite-f2e/issues/IEFRG)后，渐渐开始在项目中应用。
+继上一次[PostCSS学习指南（一）](https://github.com/whidy/postcss-study/blob/master/PostCSS%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97.md)后，渐渐开始在项目中应用。
 
 这次决定主要讲解一些个人认为非常有帮助的PostCSS插件。
 
