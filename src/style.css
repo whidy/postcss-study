@@ -1,7 +1,7 @@
-/* gulp下测试 */
+/* css测试 */
 $blue: #056ef0;
 .test {
-  display: flex;
+  display: flex; // scss注释
   color: $blue;
   .box {
     flex: 1;
