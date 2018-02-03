@@ -1,7 +1,7 @@
-/* css测试 */
+/* css文件用scss语法测试 */
 $blue: #056ef0;
 .test {
-  display: flex; // scss注释
+  display: flex; // 这是scss注释
   color: $blue;
   .box {
     flex: 1;
