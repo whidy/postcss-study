@@ -1,8 +1,12 @@
 module.exports = {
   parser: 'postcss-scss',
   plugins: [
-    require('precss'),
     require('autoprefixer'),
-    require('cssnano')
+    require('precss'),
+    require('postcss-neat')
+    // require('autoprefixer'),
+    // require('cssnano')({
+    //   autoprefixer: false
+    // })
   ]
-}
+};

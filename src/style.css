@@ -7,3 +7,11 @@ $blue: #056ef0;
     flex: 1;
   }
 }
+
+// postcss-neat插件测试. 不能与autoprefixer并存, 目前结论.
+.container {
+  @neat-outer-container;
+  .test {
+    @neat-span-columns 6;
+  }
+}
