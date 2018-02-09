@@ -8,10 +8,10 @@
   color: #056ef0;
 }
 .test .box {
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-  }
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
 /* postcss-neat插件测试. 不能与autoprefixer并存, 目前结论.*/
 .container {
   max-width: 64em;
@@ -24,11 +24,11 @@
   display: table;
 }
 .container .test {
-    display: block;
-    float: left;
-    margin-right: 2.35765160%;
-    width: 48.82117420%;
-  }
+  display: block;
+  float: left;
+  margin-right: 2.35765160%;
+  width: 48.82117420%;
+}
 .container .test:last-child {
   margin-right: 0;
 }

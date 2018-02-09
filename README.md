@@ -14,3 +14,7 @@ npm run build
 ```
 
 浏览器打开<http://localhost:9000/src/>观察效果.
+
+## postcss-salad测试
+
+该分支为`postcss-salad`插件测试

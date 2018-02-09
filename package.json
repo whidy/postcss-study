@@ -12,6 +12,8 @@
     "postcss-cssnext": "^3.1.0",
     "postcss-loader": "^2.0.6",
     "postcss-neat": "^2.5.3",
+    "postcss-plugin-px2rem": "^0.7.0",
+    "postcss-salad": "^2.0.1",
     "postcss-scss": "^1.0.3",
     "precss": "^2.0.0",
     "style-loader": "^0.18.2",
